@@ -1,0 +1,450 @@
+---
+kind: pipeline
+name: user-alpine-3.6
+trigger:
+  branch:
+  - master
+  event:
+  - push
+
+steps:
+- name: submodules
+  image: docker:git
+  commands:
+  - git submodule update --init --recursive
+  - ls -la docker-user-image
+
+- name: docker-build-amd64
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: 3.6-amd64
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine
+    build_args:
+      - QEMU_ARCH=x86_64
+      - ARCH_IMG=amd64/alpine:3.6
+
+- name: docker-build-arm32v6
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: 3.6-arm
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=arm
+      - ARCH_IMG=arm32v6/alpine:3.6
+
+- name: docker-build-arm64v8
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: 3.6-arm64
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=aarch64
+      - ARCH_IMG=arm64v8/alpine:3.6
+
+- name: docker-push-manifest
+  image: plugins/manifest:1
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    target: phasecorex/user-alpine:3.6
+    template: phasecorex/user-alpine:3.6-ARCH
+    platforms:
+      - linux/amd64
+      - linux/arm
+      - linux/arm64
+
+---
+kind: pipeline
+name: user-alpine-3.7
+trigger:
+  branch:
+  - master
+  event:
+  - push
+
+steps:
+- name: submodules
+  image: docker:git
+  commands:
+  - git submodule update --init --recursive
+  - ls -la docker-user-image
+
+- name: docker-build-amd64
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: 3.7-amd64
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine
+    build_args:
+      - QEMU_ARCH=x86_64
+      - ARCH_IMG=amd64/alpine:3.7
+
+- name: docker-build-arm32v6
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: 3.7-arm
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=arm
+      - ARCH_IMG=arm32v6/alpine:3.7
+
+- name: docker-build-arm64v8
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: 3.7-arm64
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=aarch64
+      - ARCH_IMG=arm64v8/alpine:3.7
+
+- name: docker-push-manifest
+  image: plugins/manifest:1
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    target: phasecorex/user-alpine:3.7
+    template: phasecorex/user-alpine:3.7-ARCH
+    platforms:
+      - linux/amd64
+      - linux/arm
+      - linux/arm64
+
+---
+kind: pipeline
+name: user-alpine-3.8
+trigger:
+  branch:
+  - master
+  event:
+  - push
+
+steps:
+- name: submodules
+  image: docker:git
+  commands:
+  - git submodule update --init --recursive
+  - ls -la docker-user-image
+
+- name: docker-build-amd64
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: 3.8-amd64
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine
+    build_args:
+      - QEMU_ARCH=x86_64
+      - ARCH_IMG=amd64/alpine:3.8
+
+- name: docker-build-arm32v6
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: 3.8-arm
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=arm
+      - ARCH_IMG=arm32v6/alpine:3.8
+
+- name: docker-build-arm64v8
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: 3.8-arm64
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=aarch64
+      - ARCH_IMG=arm64v8/alpine:3.8
+
+- name: docker-push-manifest
+  image: plugins/manifest:1
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    target: phasecorex/user-alpine:3.8
+    template: phasecorex/user-alpine:3.8-ARCH
+    platforms:
+      - linux/amd64
+      - linux/arm
+      - linux/arm64
+
+---
+kind: pipeline
+name: user-alpine-3.9
+trigger:
+  branch:
+  - master
+  event:
+  - push
+
+steps:
+- name: submodules
+  image: docker:git
+  commands:
+  - git submodule update --init --recursive
+  - ls -la docker-user-image
+
+- name: docker-build-amd64
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: 3.9-amd64
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine
+    build_args:
+      - QEMU_ARCH=x86_64
+      - ARCH_IMG=amd64/alpine:3.9
+
+- name: docker-build-arm32v6
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: 3.9-arm
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=arm
+      - ARCH_IMG=arm32v6/alpine:3.9
+
+- name: docker-build-arm64v8
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: 3.9-arm64
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=aarch64
+      - ARCH_IMG=arm64v8/alpine:3.9
+
+- name: docker-push-manifest
+  image: plugins/manifest:1
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    target: phasecorex/user-alpine:3.9
+    template: phasecorex/user-alpine:3.9-ARCH
+    platforms:
+      - linux/amd64
+      - linux/arm
+      - linux/arm64
+
+---
+kind: pipeline
+name: user-alpine-edge
+trigger:
+  branch:
+  - master
+  event:
+  - push
+
+steps:
+- name: submodules
+  image: docker:git
+  commands:
+  - git submodule update --init --recursive
+  - ls -la docker-user-image
+
+- name: docker-build-amd64
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: edge-amd64
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine
+    build_args:
+      - QEMU_ARCH=x86_64
+      - ARCH_IMG=amd64/alpine:edge
+
+- name: docker-build-arm32v6
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: edge-arm
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=arm
+      - ARCH_IMG=arm32v6/alpine:edge
+
+- name: docker-build-arm64v8
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: edge-arm64
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=aarch64
+      - ARCH_IMG=arm64v8/alpine:edge
+
+- name: docker-push-manifest
+  image: plugins/manifest:1
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    target: phasecorex/user-alpine:edge
+    template: phasecorex/user-alpine:edge-ARCH
+    platforms:
+      - linux/amd64
+      - linux/arm
+      - linux/arm64
+
+---
+kind: pipeline
+name: user-alpine-latest
+trigger:
+  branch:
+  - master
+  event:
+  - push
+
+steps:
+- name: submodules
+  image: docker:git
+  commands:
+  - git submodule update --init --recursive
+  - ls -la docker-user-image
+
+- name: docker-build-amd64
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: latest-amd64
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine
+    build_args:
+      - QEMU_ARCH=x86_64
+      - ARCH_IMG=amd64/alpine:latest
+
+- name: docker-build-arm32v6
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: latest-arm
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=arm
+      - ARCH_IMG=arm32v6/alpine:latest
+
+- name: docker-build-arm64v8
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: phasecorex/user-alpine
+    tags: latest-arm64
+    context: docker-user-image
+    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    build_args:
+      - QEMU_ARCH=aarch64
+      - ARCH_IMG=arm64v8/alpine:latest
+
+- name: docker-push-manifest
+  image: plugins/manifest:1
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    target: phasecorex/user-alpine:latest
+    template: phasecorex/user-alpine:latest-ARCH
+    platforms:
+      - linux/amd64
+      - linux/arm
+      - linux/arm64
+
