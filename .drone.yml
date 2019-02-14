@@ -67,7 +67,7 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-    tags: 3.6
+    tag: 3.6
 
 ---
 kind: pipeline
@@ -138,7 +138,7 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-    tags: 3.7
+    tag: 3.7
 
 ---
 kind: pipeline
@@ -209,7 +209,7 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-    tags: 3.8
+    tag: 3.8
 
 ---
 kind: pipeline
@@ -280,7 +280,7 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-    tags: 3.9
+    tag: 3.9
 
 ---
 kind: pipeline
@@ -351,7 +351,7 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-    tags: edge
+    tag: edge
 
 ---
 kind: pipeline
@@ -422,5 +422,5 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-    tags: latest
+    tag: latest
 
