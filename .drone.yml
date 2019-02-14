@@ -70,8 +70,8 @@ steps:
     template: phasecorex/user-alpine:3.6-ARCH
     platforms:
       - linux/amd64
-      - linux/arm/v6
-      - linux/arm64/v8
+      - linux/arm
+      - linux/arm64
 
 ---
 kind: pipeline
@@ -145,8 +145,8 @@ steps:
     template: phasecorex/user-alpine:3.7-ARCH
     platforms:
       - linux/amd64
-      - linux/arm/v6
-      - linux/arm64/v8
+      - linux/arm
+      - linux/arm64
 
 ---
 kind: pipeline
@@ -220,8 +220,8 @@ steps:
     template: phasecorex/user-alpine:3.8-ARCH
     platforms:
       - linux/amd64
-      - linux/arm/v6
-      - linux/arm64/v8
+      - linux/arm
+      - linux/arm64
 
 ---
 kind: pipeline
@@ -295,8 +295,8 @@ steps:
     template: phasecorex/user-alpine:3.9-ARCH
     platforms:
       - linux/amd64
-      - linux/arm/v6
-      - linux/arm64/v8
+      - linux/arm
+      - linux/arm64
 
 ---
 kind: pipeline
@@ -370,8 +370,8 @@ steps:
     template: phasecorex/user-alpine:edge-ARCH
     platforms:
       - linux/amd64
-      - linux/arm/v6
-      - linux/arm64/v8
+      - linux/arm
+      - linux/arm64
 
 ---
 kind: pipeline
@@ -445,6 +445,6 @@ steps:
     template: phasecorex/user-alpine:latest-ARCH
     platforms:
       - linux/amd64
-      - linux/arm/v6
-      - linux/arm64/v8
+      - linux/arm
+      - linux/arm64
 
