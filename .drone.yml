@@ -66,12 +66,7 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: phasecorex/user-alpine:3.6
-    template: phasecorex/user-alpine:3.6-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -141,12 +136,7 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: phasecorex/user-alpine:3.7
-    template: phasecorex/user-alpine:3.7-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -216,12 +206,7 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: phasecorex/user-alpine:3.8
-    template: phasecorex/user-alpine:3.8-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -291,12 +276,7 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: phasecorex/user-alpine:3.9
-    template: phasecorex/user-alpine:3.9-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -366,12 +346,7 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: phasecorex/user-alpine:edge
-    template: phasecorex/user-alpine:edge-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -441,10 +416,5 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: phasecorex/user-alpine:latest
-    template: phasecorex/user-alpine:latest-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
+    spec: .manifest.tmpl
 
