@@ -67,7 +67,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-    auto_tag: true
     platforms:
       - linux/amd64
       - linux/arm
@@ -141,7 +140,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-    auto_tag: true
     platforms:
       - linux/amd64
       - linux/arm
@@ -215,7 +213,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-    auto_tag: true
     platforms:
       - linux/amd64
       - linux/arm
@@ -289,7 +286,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-    auto_tag: true
     platforms:
       - linux/amd64
       - linux/arm
@@ -363,7 +359,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-    auto_tag: true
     platforms:
       - linux/amd64
       - linux/arm
@@ -437,7 +432,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-    auto_tag: true
     platforms:
       - linux/amd64
       - linux/arm
