@@ -10,7 +10,7 @@ image: phasecorex/${docker_image}:{{#if build.tag}}{{trimPrefix build.tag "v"}}{
 {{#if build.tags}}
 tags:
 {{#each build.tags}}
-- {{this}}
+  - {{this}}
 {{/each}}
 {{/if}}
 manifests:
@@ -28,16 +28,16 @@ for arch in ${archs_filtered}; do
             exit 1
     esac
     cat << EOF >> ./.manifest.tmpl
--
-image: phasecorex/${docker_image}:{{#if build.tag}}{{trimPrefix build.tag "v"}}-{{/if}}${arch}
-platform:
-  architecture: ${tag_arch}
-  os: ${os}
+  -
+    image: phasecorex/${docker_image}:{{#if build.tag}}{{trimPrefix build.tag "v"}}-{{/if}}${arch}
+    platform:
+      architecture: ${tag_arch}
+      os: ${os}
 EOF
 
     if [[ ! -z ${variant} ]]; then
         cat << EOF >> ./.manifest.tmpl
-  variant: ${variant}
+      variant: ${variant}
 EOF
     fi
 done
