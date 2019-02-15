@@ -13,7 +13,6 @@ steps:
   commands:
   - git submodule update --init --recursive
   - ls -la docker-user-image
-  - ./prepare-manifest.sh 3.6
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -62,12 +61,14 @@ steps:
 
 - name: docker-push-manifest
   image: plugins/manifest:1
+  environment:
+    DRONE_TAG: 3.6
   settings:
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    spec: manifest.tmpl
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -84,7 +85,6 @@ steps:
   commands:
   - git submodule update --init --recursive
   - ls -la docker-user-image
-  - ./prepare-manifest.sh 3.7
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -133,12 +133,14 @@ steps:
 
 - name: docker-push-manifest
   image: plugins/manifest:1
+  environment:
+    DRONE_TAG: 3.7
   settings:
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    spec: manifest.tmpl
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -155,7 +157,6 @@ steps:
   commands:
   - git submodule update --init --recursive
   - ls -la docker-user-image
-  - ./prepare-manifest.sh 3.8
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -204,12 +205,14 @@ steps:
 
 - name: docker-push-manifest
   image: plugins/manifest:1
+  environment:
+    DRONE_TAG: 3.8
   settings:
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    spec: manifest.tmpl
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -226,7 +229,6 @@ steps:
   commands:
   - git submodule update --init --recursive
   - ls -la docker-user-image
-  - ./prepare-manifest.sh 3.9
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -275,12 +277,14 @@ steps:
 
 - name: docker-push-manifest
   image: plugins/manifest:1
+  environment:
+    DRONE_TAG: 3.9
   settings:
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    spec: manifest.tmpl
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -297,7 +301,6 @@ steps:
   commands:
   - git submodule update --init --recursive
   - ls -la docker-user-image
-  - ./prepare-manifest.sh edge
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -346,12 +349,14 @@ steps:
 
 - name: docker-push-manifest
   image: plugins/manifest:1
+  environment:
+    DRONE_TAG: edge
   settings:
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    spec: manifest.tmpl
+    spec: .manifest.tmpl
 
 ---
 kind: pipeline
@@ -368,7 +373,6 @@ steps:
   commands:
   - git submodule update --init --recursive
   - ls -la docker-user-image
-  - ./prepare-manifest.sh latest
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -417,10 +421,12 @@ steps:
 
 - name: docker-push-manifest
   image: plugins/manifest:1
+  environment:
+    DRONE_TAG: latest
   settings:
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    spec: manifest.tmpl
+    spec: .manifest.tmpl
 
