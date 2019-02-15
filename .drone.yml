@@ -12,7 +12,11 @@ steps:
   image: docker:git
   commands:
   - git submodule update --init --recursive
-  - ls -la docker-user-image
+  - echo "Pulled latest template files:"
+  - ls -1 docker-user-image
+  - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
+  - echo "Generated docker manifest template:"
+  - cat .manifest.tmpl
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -84,7 +88,11 @@ steps:
   image: docker:git
   commands:
   - git submodule update --init --recursive
-  - ls -la docker-user-image
+  - echo "Pulled latest template files:"
+  - ls -1 docker-user-image
+  - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
+  - echo "Generated docker manifest template:"
+  - cat .manifest.tmpl
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -156,7 +164,11 @@ steps:
   image: docker:git
   commands:
   - git submodule update --init --recursive
-  - ls -la docker-user-image
+  - echo "Pulled latest template files:"
+  - ls -1 docker-user-image
+  - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
+  - echo "Generated docker manifest template:"
+  - cat .manifest.tmpl
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -228,7 +240,11 @@ steps:
   image: docker:git
   commands:
   - git submodule update --init --recursive
-  - ls -la docker-user-image
+  - echo "Pulled latest template files:"
+  - ls -1 docker-user-image
+  - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
+  - echo "Generated docker manifest template:"
+  - cat .manifest.tmpl
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -300,7 +316,11 @@ steps:
   image: docker:git
   commands:
   - git submodule update --init --recursive
-  - ls -la docker-user-image
+  - echo "Pulled latest template files:"
+  - ls -1 docker-user-image
+  - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
+  - echo "Generated docker manifest template:"
+  - cat .manifest.tmpl
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -372,7 +392,11 @@ steps:
   image: docker:git
   commands:
   - git submodule update --init --recursive
-  - ls -la docker-user-image
+  - echo "Pulled latest template files:"
+  - ls -1 docker-user-image
+  - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
+  - echo "Generated docker manifest template:"
+  - cat .manifest.tmpl
 
 - name: docker-build-amd64
   image: plugins/docker
