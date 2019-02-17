@@ -17,6 +17,10 @@ steps:
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
+    - mkdir -p /cache/${DRONE_REPO}/docker
+  volumes:
+    - name: cache
+      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -90,6 +94,9 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
+  - name: cache
+    host:
+      path: /var/cache
   - name: docker
     host:
       path: /var/cache/${DRONE_REPO}/docker
@@ -113,6 +120,10 @@ steps:
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
+    - mkdir -p /cache/${DRONE_REPO}/docker
+  volumes:
+    - name: cache
+      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -186,6 +197,9 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
+  - name: cache
+    host:
+      path: /var/cache
   - name: docker
     host:
       path: /var/cache/${DRONE_REPO}/docker
@@ -209,6 +223,10 @@ steps:
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
+    - mkdir -p /cache/${DRONE_REPO}/docker
+  volumes:
+    - name: cache
+      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -282,6 +300,9 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
+  - name: cache
+    host:
+      path: /var/cache
   - name: docker
     host:
       path: /var/cache/${DRONE_REPO}/docker
@@ -305,6 +326,10 @@ steps:
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
+    - mkdir -p /cache/${DRONE_REPO}/docker
+  volumes:
+    - name: cache
+      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -378,6 +403,9 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
+  - name: cache
+    host:
+      path: /var/cache
   - name: docker
     host:
       path: /var/cache/${DRONE_REPO}/docker
@@ -401,6 +429,10 @@ steps:
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
+    - mkdir -p /cache/${DRONE_REPO}/docker
+  volumes:
+    - name: cache
+      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -474,6 +506,9 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
+  - name: cache
+    host:
+      path: /var/cache
   - name: docker
     host:
       path: /var/cache/${DRONE_REPO}/docker
@@ -497,6 +532,10 @@ steps:
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
+    - mkdir -p /cache/${DRONE_REPO}/docker
+  volumes:
+    - name: cache
+      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -570,6 +609,9 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
+  - name: cache
+    host:
+      path: /var/cache
   - name: docker
     host:
       path: /var/cache/${DRONE_REPO}/docker
