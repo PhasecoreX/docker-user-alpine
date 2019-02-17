@@ -17,10 +17,6 @@ steps:
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-    - mkdir -p /cache/${DRONE_REPO}/docker
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -32,6 +28,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: 3.6-amd64
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
@@ -51,6 +48,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: 3.6-arm32v6
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -70,6 +68,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: 3.6-arm64v8
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -91,9 +90,6 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
-  - name: cache
-    host:
-      path: /var/cache
   - name: docker
     host:
       path: /var/cache/${DRONE_REPO}/docker
@@ -117,10 +113,6 @@ steps:
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-    - mkdir -p /cache/${DRONE_REPO}/docker
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -132,6 +124,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: 3.7-amd64
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
@@ -151,6 +144,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: 3.7-arm32v6
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -170,6 +164,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: 3.7-arm64v8
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -191,9 +186,6 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
-  - name: cache
-    host:
-      path: /var/cache
   - name: docker
     host:
       path: /var/cache/${DRONE_REPO}/docker
@@ -217,10 +209,6 @@ steps:
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-    - mkdir -p /cache/${DRONE_REPO}/docker
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -232,6 +220,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: 3.8-amd64
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
@@ -251,6 +240,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: 3.8-arm32v6
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -270,6 +260,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: 3.8-arm64v8
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -291,9 +282,6 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
-  - name: cache
-    host:
-      path: /var/cache
   - name: docker
     host:
       path: /var/cache/${DRONE_REPO}/docker
@@ -317,10 +305,6 @@ steps:
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-    - mkdir -p /cache/${DRONE_REPO}/docker
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -332,6 +316,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: 3.9-amd64
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
@@ -351,6 +336,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: 3.9-arm32v6
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -370,6 +356,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: 3.9-arm64v8
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -391,9 +378,6 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
-  - name: cache
-    host:
-      path: /var/cache
   - name: docker
     host:
       path: /var/cache/${DRONE_REPO}/docker
@@ -417,10 +401,6 @@ steps:
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-    - mkdir -p /cache/${DRONE_REPO}/docker
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -432,6 +412,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: edge-amd64
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
@@ -451,6 +432,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: edge-arm32v6
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -470,6 +452,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: edge-arm64v8
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -491,9 +474,6 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
-  - name: cache
-    host:
-      path: /var/cache
   - name: docker
     host:
       path: /var/cache/${DRONE_REPO}/docker
@@ -517,10 +497,6 @@ steps:
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
-    - mkdir -p /cache/${DRONE_REPO}/docker
-  volumes:
-    - name: cache
-      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -532,6 +508,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: latest-amd64
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
@@ -551,6 +528,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: latest-arm32v6
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -570,6 +548,7 @@ steps:
     repo: phasecorex/user-alpine
     tags: latest-arm64v8
     use_cache: true
+    create_repository: true
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
@@ -591,9 +570,6 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
-  - name: cache
-    host:
-      path: /var/cache
   - name: docker
     host:
       path: /var/cache/${DRONE_REPO}/docker
