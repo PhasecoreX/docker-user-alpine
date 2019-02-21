@@ -11,12 +11,17 @@ steps:
 - name: prepare
   image: docker:git
   commands:
+    - mkdir -p /cache/${DRONE_REPO}/docker
+    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
+  volumes:
+    - name: cache
+      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -26,15 +31,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: 3.6-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/alpine:3.6
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-build-arm32v6
   image: plugins/docker
@@ -44,15 +51,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: 3.6-arm32v6
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.6
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -62,15 +71,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: 3.6-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.6
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-push-manifest
   image: plugins/manifest:1
@@ -82,6 +93,14 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
+
+volumes:
+  - name: cache
+    host:
+      path: /var/cache
+  - name: docker
+    host:
+      path: /var/cache/${DRONE_REPO}/docker
 
 ---
 kind: pipeline
@@ -96,12 +115,17 @@ steps:
 - name: prepare
   image: docker:git
   commands:
+    - mkdir -p /cache/${DRONE_REPO}/docker
+    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
+  volumes:
+    - name: cache
+      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -111,15 +135,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: 3.7-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/alpine:3.7
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-build-arm32v6
   image: plugins/docker
@@ -129,15 +155,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: 3.7-arm32v6
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.7
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -147,15 +175,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: 3.7-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.7
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-push-manifest
   image: plugins/manifest:1
@@ -167,6 +197,14 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
+
+volumes:
+  - name: cache
+    host:
+      path: /var/cache
+  - name: docker
+    host:
+      path: /var/cache/${DRONE_REPO}/docker
 
 ---
 kind: pipeline
@@ -181,12 +219,17 @@ steps:
 - name: prepare
   image: docker:git
   commands:
+    - mkdir -p /cache/${DRONE_REPO}/docker
+    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
+  volumes:
+    - name: cache
+      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -196,15 +239,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: 3.8-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/alpine:3.8
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-build-arm32v6
   image: plugins/docker
@@ -214,15 +259,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: 3.8-arm32v6
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.8
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -232,15 +279,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: 3.8-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.8
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-push-manifest
   image: plugins/manifest:1
@@ -252,6 +301,14 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
+
+volumes:
+  - name: cache
+    host:
+      path: /var/cache
+  - name: docker
+    host:
+      path: /var/cache/${DRONE_REPO}/docker
 
 ---
 kind: pipeline
@@ -266,12 +323,17 @@ steps:
 - name: prepare
   image: docker:git
   commands:
+    - mkdir -p /cache/${DRONE_REPO}/docker
+    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
+  volumes:
+    - name: cache
+      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -281,15 +343,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: 3.9-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/alpine:3.9
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-build-arm32v6
   image: plugins/docker
@@ -299,15 +363,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: 3.9-arm32v6
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.9
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -317,15 +383,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: 3.9-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.9
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-push-manifest
   image: plugins/manifest:1
@@ -337,6 +405,14 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
+
+volumes:
+  - name: cache
+    host:
+      path: /var/cache
+  - name: docker
+    host:
+      path: /var/cache/${DRONE_REPO}/docker
 
 ---
 kind: pipeline
@@ -351,12 +427,17 @@ steps:
 - name: prepare
   image: docker:git
   commands:
+    - mkdir -p /cache/${DRONE_REPO}/docker
+    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
+  volumes:
+    - name: cache
+      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -366,15 +447,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: edge-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/alpine:edge
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-build-arm32v6
   image: plugins/docker
@@ -384,15 +467,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: edge-arm32v6
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:edge
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -402,15 +487,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: edge-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:edge
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-push-manifest
   image: plugins/manifest:1
@@ -422,6 +509,14 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
+
+volumes:
+  - name: cache
+    host:
+      path: /var/cache
+  - name: docker
+    host:
+      path: /var/cache/${DRONE_REPO}/docker
 
 ---
 kind: pipeline
@@ -436,12 +531,17 @@ steps:
 - name: prepare
   image: docker:git
   commands:
+    - mkdir -p /cache/${DRONE_REPO}/docker
+    - echo "Enabled build caching"
     - git submodule update --init --recursive
     - echo "Pulled latest template files:"
     - ls -1 docker-user-image
     - ./generate_manifest.sh user-alpine amd64 arm32v6 arm64v8
     - echo "Generated docker manifest template:"
     - cat .manifest.tmpl
+  volumes:
+    - name: cache
+      path: /cache
 
 - name: docker-build-amd64
   image: plugins/docker
@@ -451,15 +551,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: latest-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/alpine:latest
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-build-arm32v6
   image: plugins/docker
@@ -469,15 +571,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: latest-arm32v6
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:latest
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-build-arm64v8
   image: plugins/docker
@@ -487,15 +591,17 @@ steps:
     password:
       from_secret: docker_password
     repo: phasecorex/user-alpine
+    create_repository: true
+    use_cache: true
     tags: latest-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:latest
-    volumes:
-      - name: docker
-        path: /var/lib/docker
+  volumes:
+    - name: docker
+      path: /var/lib/docker
 
 - name: docker-push-manifest
   image: plugins/manifest:1
@@ -507,4 +613,12 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
+
+volumes:
+  - name: cache
+    host:
+      path: /var/cache
+  - name: docker
+    host:
+      path: /var/cache/${DRONE_REPO}/docker
 
