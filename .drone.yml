@@ -14,8 +14,8 @@ steps:
     - apk add --no-cache curl
     - QEMU_USER_STATIC_DOWNLOAD_URL="https://github.com/multiarch/qemu-user-static/releases/download"
     - QEMU_USER_STATIC_LATEST_TAG=v3.1.0-2
-    - curl -SL "//x86_64_qemu-arm-static.tar.gz"           | tar xzv
-    - curl -SL "//x86_64_qemu-aarch64-static.tar.gz"           | tar xzv
+    - curl -SL "${QEMU_USER_STATIC_DOWNLOAD_URL}/${QEMU_USER_STATIC_LATEST_TAG}/x86_64_qemu-arm-static.tar.gz"           | tar xzv
+    - curl -SL "${QEMU_USER_STATIC_DOWNLOAD_URL}/${QEMU_USER_STATIC_LATEST_TAG}/x86_64_qemu-aarch64-static.tar.gz"           | tar xzv
     - cp qemu-* /usrbin/
   volumes:
     - name: usrbin
@@ -24,6 +24,7 @@ steps:
 - name: register-qemu
   image: multiarch/qemu-user-static:register
   command: [ "--reset" ]
+  privileged: true
 
 volumes:
 - name: usrbin
