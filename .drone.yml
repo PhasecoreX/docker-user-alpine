@@ -1,5 +1,37 @@
 ---
 kind: pipeline
+name: prepare
+trigger:
+  branch:
+  - master
+  event:
+  - push
+
+steps:
+- name: download-qemu
+  image: alpine
+  commands:
+    - apk add --no-cache curl
+    - QEMU_USER_STATIC_DOWNLOAD_URL="https://github.com/multiarch/qemu-user-static/releases/download"
+    - QEMU_USER_STATIC_LATEST_TAG=v3.1.0-2
+    - curl -SL "//x86_64_qemu-arm-static.tar.gz"           | tar xzv
+    - curl -SL "//x86_64_qemu-aarch64-static.tar.gz"           | tar xzv
+    - cp qemu-* /usrbin/
+  volumes:
+    - name: usrbin
+      path: /usrbin
+
+- name: register-qemu
+  image: multiarch/qemu-user-static:register
+  command: [ "--reset" ]
+
+volumes:
+- name: usrbin
+  host:
+    path: /usr/bin
+
+---
+kind: pipeline
 name: user-alpine-3.6
 trigger:
   branch:
@@ -24,7 +56,7 @@ steps:
       path: /cache
 
 - name: docker-build-amd64
-  image: plugins/docker
+  image: plugins/docker:linux-amd64
   settings:
     username:
       from_secret: docker_username
@@ -44,7 +76,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-build-arm32v6
-  image: plugins/docker
+  image: plugins/docker:linux-arm
   settings:
     username:
       from_secret: docker_username
@@ -55,16 +87,18 @@ steps:
     use_cache: true
     tags: 3.6-arm32v6
     context: docker-user-image
-    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.6
   volumes:
+    - name: qemu-arm-static
+      path: /usr/bin/qemu-arm-static
     - name: docker
       path: /var/lib/docker
 
 - name: docker-build-arm64v8
-  image: plugins/docker
+  image: plugins/docker:linux-arm64
   settings:
     username:
       from_secret: docker_username
@@ -75,11 +109,13 @@ steps:
     use_cache: true
     tags: 3.6-arm64v8
     context: docker-user-image
-    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.6
   volumes:
+    - name: qemu-aarch64-static
+      path: /usr/bin/qemu-aarch64-static
     - name: docker
       path: /var/lib/docker
 
@@ -95,12 +131,21 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
-  - name: cache
-    host:
-      path: /var/cache
-  - name: docker
-    host:
-      path: /var/cache/${DRONE_REPO}/docker
+- name: cache
+  host:
+    path: /var/cache
+- name: docker
+  host:
+    path: /var/cache/${DRONE_REPO}/docker
+- name: qemu-arm-static
+  host:
+    path: /usr/bin/qemu-arm-static
+- name: qemu-aarch64-static
+  host:
+    path: /usr/bin/qemu-aarch64-static
+
+depends_on:
+  - prepare
 
 ---
 kind: pipeline
@@ -128,7 +173,7 @@ steps:
       path: /cache
 
 - name: docker-build-amd64
-  image: plugins/docker
+  image: plugins/docker:linux-amd64
   settings:
     username:
       from_secret: docker_username
@@ -148,7 +193,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-build-arm32v6
-  image: plugins/docker
+  image: plugins/docker:linux-arm
   settings:
     username:
       from_secret: docker_username
@@ -159,16 +204,18 @@ steps:
     use_cache: true
     tags: 3.7-arm32v6
     context: docker-user-image
-    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.7
   volumes:
+    - name: qemu-arm-static
+      path: /usr/bin/qemu-arm-static
     - name: docker
       path: /var/lib/docker
 
 - name: docker-build-arm64v8
-  image: plugins/docker
+  image: plugins/docker:linux-arm64
   settings:
     username:
       from_secret: docker_username
@@ -179,11 +226,13 @@ steps:
     use_cache: true
     tags: 3.7-arm64v8
     context: docker-user-image
-    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.7
   volumes:
+    - name: qemu-aarch64-static
+      path: /usr/bin/qemu-aarch64-static
     - name: docker
       path: /var/lib/docker
 
@@ -199,12 +248,21 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
-  - name: cache
-    host:
-      path: /var/cache
-  - name: docker
-    host:
-      path: /var/cache/${DRONE_REPO}/docker
+- name: cache
+  host:
+    path: /var/cache
+- name: docker
+  host:
+    path: /var/cache/${DRONE_REPO}/docker
+- name: qemu-arm-static
+  host:
+    path: /usr/bin/qemu-arm-static
+- name: qemu-aarch64-static
+  host:
+    path: /usr/bin/qemu-aarch64-static
+
+depends_on:
+  - prepare
 
 ---
 kind: pipeline
@@ -232,7 +290,7 @@ steps:
       path: /cache
 
 - name: docker-build-amd64
-  image: plugins/docker
+  image: plugins/docker:linux-amd64
   settings:
     username:
       from_secret: docker_username
@@ -252,7 +310,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-build-arm32v6
-  image: plugins/docker
+  image: plugins/docker:linux-arm
   settings:
     username:
       from_secret: docker_username
@@ -263,16 +321,18 @@ steps:
     use_cache: true
     tags: 3.8-arm32v6
     context: docker-user-image
-    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.8
   volumes:
+    - name: qemu-arm-static
+      path: /usr/bin/qemu-arm-static
     - name: docker
       path: /var/lib/docker
 
 - name: docker-build-arm64v8
-  image: plugins/docker
+  image: plugins/docker:linux-arm64
   settings:
     username:
       from_secret: docker_username
@@ -283,11 +343,13 @@ steps:
     use_cache: true
     tags: 3.8-arm64v8
     context: docker-user-image
-    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.8
   volumes:
+    - name: qemu-aarch64-static
+      path: /usr/bin/qemu-aarch64-static
     - name: docker
       path: /var/lib/docker
 
@@ -303,12 +365,21 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
-  - name: cache
-    host:
-      path: /var/cache
-  - name: docker
-    host:
-      path: /var/cache/${DRONE_REPO}/docker
+- name: cache
+  host:
+    path: /var/cache
+- name: docker
+  host:
+    path: /var/cache/${DRONE_REPO}/docker
+- name: qemu-arm-static
+  host:
+    path: /usr/bin/qemu-arm-static
+- name: qemu-aarch64-static
+  host:
+    path: /usr/bin/qemu-aarch64-static
+
+depends_on:
+  - prepare
 
 ---
 kind: pipeline
@@ -336,7 +407,7 @@ steps:
       path: /cache
 
 - name: docker-build-amd64
-  image: plugins/docker
+  image: plugins/docker:linux-amd64
   settings:
     username:
       from_secret: docker_username
@@ -356,7 +427,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-build-arm32v6
-  image: plugins/docker
+  image: plugins/docker:linux-arm
   settings:
     username:
       from_secret: docker_username
@@ -367,16 +438,18 @@ steps:
     use_cache: true
     tags: 3.9-arm32v6
     context: docker-user-image
-    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.9
   volumes:
+    - name: qemu-arm-static
+      path: /usr/bin/qemu-arm-static
     - name: docker
       path: /var/lib/docker
 
 - name: docker-build-arm64v8
-  image: plugins/docker
+  image: plugins/docker:linux-arm64
   settings:
     username:
       from_secret: docker_username
@@ -387,11 +460,13 @@ steps:
     use_cache: true
     tags: 3.9-arm64v8
     context: docker-user-image
-    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.9
   volumes:
+    - name: qemu-aarch64-static
+      path: /usr/bin/qemu-aarch64-static
     - name: docker
       path: /var/lib/docker
 
@@ -407,12 +482,21 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
-  - name: cache
-    host:
-      path: /var/cache
-  - name: docker
-    host:
-      path: /var/cache/${DRONE_REPO}/docker
+- name: cache
+  host:
+    path: /var/cache
+- name: docker
+  host:
+    path: /var/cache/${DRONE_REPO}/docker
+- name: qemu-arm-static
+  host:
+    path: /usr/bin/qemu-arm-static
+- name: qemu-aarch64-static
+  host:
+    path: /usr/bin/qemu-aarch64-static
+
+depends_on:
+  - prepare
 
 ---
 kind: pipeline
@@ -440,7 +524,7 @@ steps:
       path: /cache
 
 - name: docker-build-amd64
-  image: plugins/docker
+  image: plugins/docker:linux-amd64
   settings:
     username:
       from_secret: docker_username
@@ -460,7 +544,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-build-arm32v6
-  image: plugins/docker
+  image: plugins/docker:linux-arm
   settings:
     username:
       from_secret: docker_username
@@ -471,16 +555,18 @@ steps:
     use_cache: true
     tags: edge-arm32v6
     context: docker-user-image
-    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:edge
   volumes:
+    - name: qemu-arm-static
+      path: /usr/bin/qemu-arm-static
     - name: docker
       path: /var/lib/docker
 
 - name: docker-build-arm64v8
-  image: plugins/docker
+  image: plugins/docker:linux-arm64
   settings:
     username:
       from_secret: docker_username
@@ -491,11 +577,13 @@ steps:
     use_cache: true
     tags: edge-arm64v8
     context: docker-user-image
-    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:edge
   volumes:
+    - name: qemu-aarch64-static
+      path: /usr/bin/qemu-aarch64-static
     - name: docker
       path: /var/lib/docker
 
@@ -511,12 +599,21 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
-  - name: cache
-    host:
-      path: /var/cache
-  - name: docker
-    host:
-      path: /var/cache/${DRONE_REPO}/docker
+- name: cache
+  host:
+    path: /var/cache
+- name: docker
+  host:
+    path: /var/cache/${DRONE_REPO}/docker
+- name: qemu-arm-static
+  host:
+    path: /usr/bin/qemu-arm-static
+- name: qemu-aarch64-static
+  host:
+    path: /usr/bin/qemu-aarch64-static
+
+depends_on:
+  - prepare
 
 ---
 kind: pipeline
@@ -544,7 +641,7 @@ steps:
       path: /cache
 
 - name: docker-build-amd64
-  image: plugins/docker
+  image: plugins/docker:linux-amd64
   settings:
     username:
       from_secret: docker_username
@@ -564,7 +661,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-build-arm32v6
-  image: plugins/docker
+  image: plugins/docker:linux-arm
   settings:
     username:
       from_secret: docker_username
@@ -575,16 +672,18 @@ steps:
     use_cache: true
     tags: latest-arm32v6
     context: docker-user-image
-    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:latest
   volumes:
+    - name: qemu-arm-static
+      path: /usr/bin/qemu-arm-static
     - name: docker
       path: /var/lib/docker
 
 - name: docker-build-arm64v8
-  image: plugins/docker
+  image: plugins/docker:linux-arm64
   settings:
     username:
       from_secret: docker_username
@@ -595,11 +694,13 @@ steps:
     use_cache: true
     tags: latest-arm64v8
     context: docker-user-image
-    dockerfile: docker-user-image/Dockerfile.alpine.qemu
+    dockerfile: docker-user-image/Dockerfile.alpine
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:latest
   volumes:
+    - name: qemu-aarch64-static
+      path: /usr/bin/qemu-aarch64-static
     - name: docker
       path: /var/lib/docker
 
@@ -615,10 +716,19 @@ steps:
     spec: .manifest.tmpl
 
 volumes:
-  - name: cache
-    host:
-      path: /var/cache
-  - name: docker
-    host:
-      path: /var/cache/${DRONE_REPO}/docker
+- name: cache
+  host:
+    path: /var/cache
+- name: docker
+  host:
+    path: /var/cache/${DRONE_REPO}/docker
+- name: qemu-arm-static
+  host:
+    path: /usr/bin/qemu-arm-static
+- name: qemu-aarch64-static
+  host:
+    path: /usr/bin/qemu-aarch64-static
+
+depends_on:
+  - prepare
 
