@@ -75,7 +75,8 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.6
   volumes:
-    - /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static:ro
+    - name: qemu-arm-static
+      path: /usr/bin/qemu-arm-static
     - name: docker
       path: /var/lib/docker
 
@@ -96,7 +97,8 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.6
   volumes:
-    - /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static:ro
+    - name: qemu-aarch64-static
+      path: /usr/bin/qemu-aarch64-static
     - name: docker
       path: /var/lib/docker
 
@@ -118,6 +120,12 @@ volumes:
 - name: docker
   host:
     path: /var/cache/${DRONE_REPO}/docker
+- name: qemu-arm-static
+  host:
+    path: /usr/bin/qemu-arm-static
+- name: qemu-aarch64-static
+  host:
+    path: /usr/bin/qemu-aarch64-static
 
 depends_on:
   - prepare
@@ -184,7 +192,8 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.7
   volumes:
-    - /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static:ro
+    - name: qemu-arm-static
+      path: /usr/bin/qemu-arm-static
     - name: docker
       path: /var/lib/docker
 
@@ -205,7 +214,8 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.7
   volumes:
-    - /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static:ro
+    - name: qemu-aarch64-static
+      path: /usr/bin/qemu-aarch64-static
     - name: docker
       path: /var/lib/docker
 
@@ -227,6 +237,12 @@ volumes:
 - name: docker
   host:
     path: /var/cache/${DRONE_REPO}/docker
+- name: qemu-arm-static
+  host:
+    path: /usr/bin/qemu-arm-static
+- name: qemu-aarch64-static
+  host:
+    path: /usr/bin/qemu-aarch64-static
 
 depends_on:
   - prepare
@@ -293,7 +309,8 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.8
   volumes:
-    - /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static:ro
+    - name: qemu-arm-static
+      path: /usr/bin/qemu-arm-static
     - name: docker
       path: /var/lib/docker
 
@@ -314,7 +331,8 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.8
   volumes:
-    - /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static:ro
+    - name: qemu-aarch64-static
+      path: /usr/bin/qemu-aarch64-static
     - name: docker
       path: /var/lib/docker
 
@@ -336,6 +354,12 @@ volumes:
 - name: docker
   host:
     path: /var/cache/${DRONE_REPO}/docker
+- name: qemu-arm-static
+  host:
+    path: /usr/bin/qemu-arm-static
+- name: qemu-aarch64-static
+  host:
+    path: /usr/bin/qemu-aarch64-static
 
 depends_on:
   - prepare
@@ -402,7 +426,8 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.9
   volumes:
-    - /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static:ro
+    - name: qemu-arm-static
+      path: /usr/bin/qemu-arm-static
     - name: docker
       path: /var/lib/docker
 
@@ -423,7 +448,8 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.9
   volumes:
-    - /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static:ro
+    - name: qemu-aarch64-static
+      path: /usr/bin/qemu-aarch64-static
     - name: docker
       path: /var/lib/docker
 
@@ -445,6 +471,12 @@ volumes:
 - name: docker
   host:
     path: /var/cache/${DRONE_REPO}/docker
+- name: qemu-arm-static
+  host:
+    path: /usr/bin/qemu-arm-static
+- name: qemu-aarch64-static
+  host:
+    path: /usr/bin/qemu-aarch64-static
 
 depends_on:
   - prepare
@@ -511,7 +543,8 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:edge
   volumes:
-    - /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static:ro
+    - name: qemu-arm-static
+      path: /usr/bin/qemu-arm-static
     - name: docker
       path: /var/lib/docker
 
@@ -532,7 +565,8 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:edge
   volumes:
-    - /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static:ro
+    - name: qemu-aarch64-static
+      path: /usr/bin/qemu-aarch64-static
     - name: docker
       path: /var/lib/docker
 
@@ -554,6 +588,12 @@ volumes:
 - name: docker
   host:
     path: /var/cache/${DRONE_REPO}/docker
+- name: qemu-arm-static
+  host:
+    path: /usr/bin/qemu-arm-static
+- name: qemu-aarch64-static
+  host:
+    path: /usr/bin/qemu-aarch64-static
 
 depends_on:
   - prepare
@@ -620,7 +660,8 @@ steps:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:latest
   volumes:
-    - /usr/bin/qemu-arm-static:/usr/bin/qemu-arm-static:ro
+    - name: qemu-arm-static
+      path: /usr/bin/qemu-arm-static
     - name: docker
       path: /var/lib/docker
 
@@ -641,7 +682,8 @@ steps:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:latest
   volumes:
-    - /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static:ro
+    - name: qemu-aarch64-static
+      path: /usr/bin/qemu-aarch64-static
     - name: docker
       path: /var/lib/docker
 
@@ -663,6 +705,12 @@ volumes:
 - name: docker
   host:
     path: /var/cache/${DRONE_REPO}/docker
+- name: qemu-arm-static
+  host:
+    path: /usr/bin/qemu-arm-static
+- name: qemu-aarch64-static
+  host:
+    path: /usr/bin/qemu-aarch64-static
 
 depends_on:
   - prepare
