@@ -50,7 +50,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.6-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
@@ -71,7 +71,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.6-arm32v6
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
@@ -92,7 +92,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.6-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
@@ -160,7 +160,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.7-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
@@ -181,7 +181,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.7-arm32v6
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
@@ -202,7 +202,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.7-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
@@ -270,7 +270,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.8-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
@@ -291,7 +291,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.8-arm32v6
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
@@ -312,7 +312,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.8-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
@@ -380,7 +380,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - edge-arm64v8
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
@@ -401,7 +401,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - edge-arm32v7
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
@@ -422,7 +422,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - edge-arm32v6
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine.qemu
@@ -443,7 +443,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - edge-amd64
     context: docker-user-image
     dockerfile: docker-user-image/Dockerfile.alpine
@@ -511,7 +511,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.9-arm64v8
       - latest-arm64v8
     context: docker-user-image
@@ -533,7 +533,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.9-arm32v7
       - latest-arm32v7
     context: docker-user-image
@@ -555,7 +555,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.9-arm32v6
       - latest-arm32v6
     context: docker-user-image
@@ -577,7 +577,7 @@ steps:
     repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
-    tags: 
+    tags:
       - 3.9-amd64
       - latest-amd64
     context: docker-user-image
@@ -621,4 +621,41 @@ volumes:
 
 depends_on:
   - prepare
+
+---
+kind: pipeline
+name: notify
+trigger:
+  branch:
+  - master
+  event:
+  - push
+  status:
+  - success
+  - failure
+clone:
+  disable: true
+
+steps:
+- name: send-notification
+  image: appleboy/drone-discord
+  allow_failure: true
+  settings:
+    webhook_id:
+      from_secret: discord_webhook_id
+    webhook_token:
+      from_secret: discord_webhook_token
+    message: >
+      {#success build.status}
+        **{repo.name}**: Build #{build.number} on {build.branch} branch succeeded!
+      {else}
+        **{repo.name}**: Build #{build.number} on {build.branch} branch failed. Fix me please. {build.link}
+      {/success}
+
+depends_on:
+  - user-alpine-3.6
+  - user-alpine-3.7
+  - user-alpine-3.8
+  - user-alpine-edge
+  - user-alpine-3.9
 
