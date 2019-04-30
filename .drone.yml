@@ -646,11 +646,11 @@ steps:
     webhook_token:
       from_secret: discord_webhook_token
     message: >
-      {#success build.status}
-        **{repo.name}**: Build #{build.number} on {build.branch} branch succeeded!
-      {else}
-        **{repo.name}**: Build #{build.number} on {build.branch} branch failed. Fix me please. {build.link}
-      {/success}
+      {{#success build.status}}
+        **{{repo.name}}**: Build #{{build.number}} on {{build.branch}} branch succeeded!
+      {{else}}
+        **{{repo.name}}**: Build #{{build.number}} on {{build.branch}} branch failed. Fix me please. {{build.link}}
+      {{/success}}
 
 depends_on:
   - user-alpine-3.6
