@@ -233,7 +233,7 @@ volumes:
     path: /var/cache/${DRONE_REPO}/docker
 
 depends_on:
-  - prepare
+  - user-alpine-3.6
 
 ---
 kind: pipeline
@@ -343,7 +343,7 @@ volumes:
     path: /var/cache/${DRONE_REPO}/docker
 
 depends_on:
-  - prepare
+  - user-alpine-3.7
 
 ---
 kind: pipeline
@@ -474,7 +474,7 @@ volumes:
     path: /var/cache/${DRONE_REPO}/docker
 
 depends_on:
-  - prepare
+  - user-alpine-3.8
 
 ---
 kind: pipeline
@@ -620,7 +620,7 @@ volumes:
     path: /var/cache/${DRONE_REPO}/docker
 
 depends_on:
-  - prepare
+  - user-alpine-edge
 
 ---
 kind: pipeline
