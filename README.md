@@ -3,6 +3,7 @@ Base Alpine image that steps down from root into a runtime-defined non-privilege
 
 [![Build Status](https://ci.pcxserver.com/api/badges/PhasecoreX/docker-user-alpine/status.svg)](https://ci.pcxserver.com/PhasecoreX/docker-user-alpine)
 [![Image Size](https://images.microbadger.com/badges/image/phasecorex/user-alpine.svg)](https://microbadger.com/images/phasecorex/user-alpine)
+[![Donate to support my code](https://img.shields.io/badge/Paypal-Donate-blue.svg)](https://paypal.me/pcx)
 
 ## For Developers
 Simply have your image use this image as it's base image:
