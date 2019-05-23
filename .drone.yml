@@ -47,9 +47,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - 3.6-arm64v8
     context: docker-user-image
@@ -68,9 +68,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - 3.6-arm32v6
     context: docker-user-image
@@ -89,9 +89,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - 3.6-amd64
     context: docker-user-image
@@ -157,9 +157,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - 3.7-arm64v8
     context: docker-user-image
@@ -178,9 +178,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - 3.7-arm32v6
     context: docker-user-image
@@ -199,9 +199,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - 3.7-amd64
     context: docker-user-image
@@ -267,9 +267,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - 3.8-arm64v8
     context: docker-user-image
@@ -288,9 +288,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - 3.8-arm32v6
     context: docker-user-image
@@ -309,9 +309,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - 3.8-amd64
     context: docker-user-image
@@ -377,9 +377,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - edge-arm64v8
     context: docker-user-image
@@ -398,9 +398,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - edge-arm32v7
     context: docker-user-image
@@ -419,9 +419,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - edge-arm32v6
     context: docker-user-image
@@ -440,9 +440,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - edge-amd64
     context: docker-user-image
@@ -508,9 +508,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - 3.9-arm64v8
       - latest-arm64v8
@@ -530,9 +530,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - 3.9-arm32v7
       - latest-arm32v7
@@ -552,9 +552,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - 3.9-arm32v6
       - latest-arm32v6
@@ -574,9 +574,9 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: phasecorex/user-alpine
     create_repository: true
     use_cache: true
+    repo: phasecorex/user-alpine
     tags:
       - 3.9-amd64
       - latest-amd64
