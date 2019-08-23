@@ -104,7 +104,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-3.7
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3.7
   settings:
@@ -214,7 +214,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-3.8
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3.8
   settings:
@@ -345,7 +345,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-3.9
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3.9
   settings:
@@ -476,7 +476,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-edge
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: edge
   settings:
@@ -611,7 +611,7 @@ steps:
       path: /var/lib/docker
 
 - name: docker-push-manifest-3.10
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: 3.10
   settings:
@@ -622,7 +622,7 @@ steps:
     spec: .manifest.tmpl
 
 - name: docker-push-manifest-latest
-  image: plugins/manifest:1
+  image: plugins/manifest
   environment:
     DRONE_TAG: latest
   settings:
