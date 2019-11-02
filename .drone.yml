@@ -57,6 +57,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.7
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -78,6 +79,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.7
+      - ARCH=arm32v6
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -99,6 +101,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/alpine:3.7
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -167,6 +170,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.8
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -188,6 +192,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.8
+      - ARCH=arm32v6
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -209,6 +214,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/alpine:3.8
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -277,6 +283,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.9
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -298,6 +305,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/alpine:3.9
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -319,6 +327,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.9
+      - ARCH=arm32v6
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -340,6 +349,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/alpine:3.9
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -408,6 +418,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:edge
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -429,6 +440,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/alpine:edge
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -450,6 +462,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:edge
+      - ARCH=arm32v6
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -471,6 +484,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/alpine:edge
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -540,6 +554,7 @@ steps:
     build_args:
       - QEMU_ARCH=aarch64
       - ARCH_IMG=arm64v8/alpine:3.10
+      - ARCH=arm64v8
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -562,6 +577,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v7/alpine:3.10
+      - ARCH=arm32v7
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -584,6 +600,7 @@ steps:
     build_args:
       - QEMU_ARCH=arm
       - ARCH_IMG=arm32v6/alpine:3.10
+      - ARCH=arm32v6
   volumes:
     - name: docker
       path: /var/lib/docker
@@ -606,6 +623,7 @@ steps:
     build_args:
       - QEMU_ARCH=x86_64
       - ARCH_IMG=amd64/alpine:3.10
+      - ARCH=amd64
   volumes:
     - name: docker
       path: /var/lib/docker
