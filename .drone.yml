@@ -1,22 +1,5 @@
 ---
 kind: pipeline
-name: prepare
-trigger:
-  branch:
-  - master
-  event:
-  - push
-clone:
-  disable: true
-
-steps:
-- name: register-qemu
-  image: multiarch/qemu-user-static:register
-  command: [ "--reset" ]
-  privileged: true
-
----
-kind: pipeline
 name: user-alpine-3.7
 trigger:
   branch:
@@ -102,9 +85,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-
-depends_on:
-  - prepare
 
 ---
 kind: pipeline
@@ -193,9 +173,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-
-depends_on:
-  - prepare
 
 ---
 kind: pipeline
@@ -304,9 +281,6 @@ steps:
       from_secret: docker_password
     spec: .manifest.tmpl
 
-depends_on:
-  - prepare
-
 ---
 kind: pipeline
 name: user-alpine-edge
@@ -413,9 +387,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-
-depends_on:
-  - prepare
 
 ---
 kind: pipeline
@@ -538,9 +509,6 @@ steps:
     password:
       from_secret: docker_password
     spec: .manifest.tmpl
-
-depends_on:
-  - prepare
 
 ---
 kind: pipeline
