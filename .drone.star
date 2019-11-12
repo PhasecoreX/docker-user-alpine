@@ -24,7 +24,10 @@ def generate(image_name, base_image_name, all_image_tags_arches, other_options):
         + gather_all_pipeline_manifest(image_name, all_image_tags_arches)
         + [pipeline_notify(depends_on_manifests)]
     )
-    if "downstream_builds" in other_options:
+    if (
+        "downstream_builds" in other_options
+        and other_options["downstream_builds"] != None
+    ):
         result.append(
             pipeline_downstream_build(
                 depends_on_manifests, other_options["downstream_builds"]
