@@ -103,7 +103,7 @@ def pipeline_build(image_name, image_arch, arch_infos):
         "platform": {
             "os": "linux",
             "arch": _get_drone_arch(image_arch)[0],
-            "variant": _get_drone_arch(image_arch)[1],
+            # "variant": _get_drone_arch(image_arch)[1],
         },
         "steps": steps,
     }
