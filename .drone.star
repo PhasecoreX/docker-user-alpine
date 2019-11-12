@@ -202,13 +202,13 @@ def get_build_step(image_name, image_arch, image_tags, dockerfile, image_base_ta
             "dockerfile": "docker-user-image/Dockerfile.{dockerfile}".format(
                 dockerfile=dockerfile + (".qemu" if image_arch != "amd64" else "")
             ),
-            "build_args": {
-                "QEMU_ARCH": "{qemu_arch}".format(qemu_arch=_get_qemu_arch(image_arch)),
-                "ARCH_IMG": "{arch}/{name}:{tag}".format(
+            "build_args": [
+                "QEMU_ARCH={qemu_arch}".format(qemu_arch=_get_qemu_arch(image_arch)),
+                "ARCH_IMG={arch}/{name}:{tag}".format(
                     arch=image_arch, name=image_name, tag=image_base_tag
                 ),
-                "ARCH": "{arch}".format(arch=image_arch),
-            },
+                "ARCH={arch}".format(arch=image_arch),
+            ],
         },
     }
 
