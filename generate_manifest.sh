@@ -29,7 +29,7 @@ for arch in ${archs_filtered}; do
     esac
     cat << EOF >> ./manifest.tmpl
   -
-    image: phasecorex/${docker_image}:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}${arch}
+    image: phasecorex/${docker_image}-test:{{#if build.tag}}{{trimPrefix "v" build.tag}}-{{/if}}${arch}
     platform:
       architecture: ${tag_arch}
       os: ${os}
