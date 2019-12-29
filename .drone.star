@@ -1,7 +1,7 @@
 def main(ctx):
     image_name = "phasecorex/user-alpine"
     base_image_name = "library/alpine"
-    all_image_tags_arches = [{'tags': ['3.7'], 'arches': ['arm64v8', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['3.8'], 'arches': ['arm64v8', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['3.9'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['edge'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['latest', '3.10'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}]
+    all_image_tags_arches = [{'tags': ['3.10'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['3.8'], 'arches': ['arm64v8', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['3.9'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['edge'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}, {'tags': ['latest', '3.11'], 'arches': ['arm64v8', 'arm32v7', 'arm32v6', 'amd64'], 'dockerfile': 'docker-user-image/Dockerfile.alpine'}]
     other_options = {
         "pre_build_commands": {
             "image": "docker:git",
